@@ -1,21 +1,10 @@
 
-import java.awt.BorderLayout;
-import java.awt.Canvas;
-import java.awt.CheckboxGroup;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FileDialog;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageFilter;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -75,7 +64,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 			this.add(panel);
 			
 			
-			bgImage= new ImageIcon( "C:\\Users\\Lenovo\\Desktop\\g4.jpg");
+			bgImage= new ImageIcon( "C:\\Users\\HES\\Desktop\\g4.jpg");
 			imgLabel= new JLabel();
 			imgLabel.setForeground(new Color(122,12,32));
 			imgLabel.setBounds(0,-0,375,612);
@@ -155,8 +144,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 		}
 		
 	}
-
- }
+	}
  
  
  class SignUpFrame extends JFrame implements ActionListener{
@@ -519,7 +507,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 			this.add(panel);
 			
 			
-			bgImage= new ImageIcon( "C:\\Users\\Lenovo\\Desktop\\g4.jpg");
+			bgImage= new ImageIcon( "C:\\Users\\HES\\Desktop\\g4.jpg");
 			imgLabel= new JLabel();
 			imgLabel.setForeground(new Color(122,12,32));
 			imgLabel.setBounds(0,-0,375,612);
@@ -637,7 +625,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 			this.add(panel);
 			
 			
-			bgImage= new ImageIcon( "C:\\Users\\Lenovo\\Desktop\\g4.jpg");
+			bgImage= new ImageIcon( "C:\\Users\\HES\\Desktop\\g4.jpg");
 			imgLabel= new JLabel();
 			imgLabel.setForeground(new Color(122,12,32));
 			imgLabel.setBounds(0,-0,375,612);
@@ -706,8 +694,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 	 public JComboBox Result;
 	 public JButton submit;
 	 public JButton back;
-	
-	 
+	 public JRadioButton positive;
+	 public JRadioButton negative;
 	 SubmitPCRFrame(){
 			
 
@@ -731,7 +719,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 			this.add(panel);
 			
 			
-			bgImage= new ImageIcon( "C:\\Users\\Lenovo\\Desktop\\g4.jpg");
+			bgImage= new ImageIcon( "C:\\Users\\HES\\Desktop\\g4.jpg");
 			imgLabel= new JLabel();
 			imgLabel.setForeground(new Color(122,12,32));
 			imgLabel.setBounds(0,-0,375,612);
@@ -746,32 +734,41 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 			logo.setFont(new Font("Bodoni Mt", Font.ITALIC, 48));
 			imgLabel.add(logo);
 			
-			JLabel Result = new JLabel("Please type in your PCR Result");
+			JLabel Result = new JLabel("Please select your PCR Result");
 			Result.setBounds(90, 200, 300, 50);
 			Result.setForeground(new Color(255,255,255));
-			Result.setFont(new Font("Bodoni Mt", Font.BOLD, 20));
+			Result.setFont(new Font("Bodoni Mt", Font.BOLD, 22));
 			imgLabel.add(Result);
 			
-			JCheckBox Positive = new JCheckBox("Positive");
-			JCheckBox Negative = new JCheckBox("Negative");
+			 positive= new JRadioButton("Positive");
+			 negative= new JRadioButton("Negative");
+			  ButtonGroup group2=new ButtonGroup(); 
+			  group2.add(positive);
+			  group2.add(negative);
+			  
+			  negative.setBackground(new Color(109,151,233));
+			  positive.setBackground(new Color(109,151,233));
+			  positive.setFont(new Font("Arial", Font.BOLD,16));
 
-			  Positive.setBounds(150,280,140,30);
-			  Negative.setBounds(150,310,140,30);
+			  negative.setFont(new Font("Arial", Font.BOLD,16));
+			  positive.setForeground(new Color(255,255,255));
+			  negative.setForeground(new Color(255,255,255));
+			  positive.setOpaque(false);
+			  negative.setOpaque(false);
+			  negative.addActionListener(this);
+			  positive.addActionListener(this);
+			  negative.setBounds(160,280,140,30);
+			  positive.setBounds(160,310,140,30);
+
+			  imgLabel.add(positive);
+			  imgLabel.add(negative);
 			  
-			  Positive.setBackground(new Color(255,255,255));
-			  Negative.setBackground(new Color(255,255,255));
-			  
-			  Positive.addActionListener(this);
-			  Negative.addActionListener(this);
-			  
-			  imgLabel.add(Positive);
-			  imgLabel.add(Negative);
 		    
 			 // If Positive it will show
 			 JLabel PositiveFormLabel= new JLabel();
 			 PositiveFormLabel.setForeground(new Color(109,151,233));
 			 PositiveFormLabel.setBounds(10,500,300,30);
-			 PositiveFormLabel.setFont(new Font("Arial", Font.BOLD,14));
+			 PositiveFormLabel.setFont(new Font("Arial", Font.BOLD,18));
 			 PositiveFormLabel.setText(" ");
 
 			 imgLabel.add(PositiveFormLabel);
@@ -780,7 +777,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 			 JLabel NegativeFormLabel= new JLabel();
 			 NegativeFormLabel.setForeground(new Color(109,151,233));
 			 NegativeFormLabel.setBounds(10,500,300,30);
-			 NegativeFormLabel.setFont(new Font("Arial", Font.BOLD,14));
+			 NegativeFormLabel.setFont(new Font("Arial", Font.BOLD,18));
 			 NegativeFormLabel.setText(" ");
 
 			 imgLabel.add(NegativeFormLabel);
