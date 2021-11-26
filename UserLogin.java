@@ -1,3 +1,5 @@
+package Server;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.Connection;
@@ -32,12 +34,8 @@ public class UserLogin {
                 for (int i=0; i<passwordDB.length; i++){
                     str1 += passwordDB[i];
                 }
-                String str2 = "";
-                for (int i=0; i<hashedPassword.length; i++){
-                    str2 += passwordDB[i];
-                }
 
-                if(str1.equals(str2)){
+                if(str1.equals(password)){
                     System.out.println("Correct password!");
                     return true;
                 }else{
@@ -52,7 +50,6 @@ public class UserLogin {
             e.printStackTrace();
             return false;
         }
-
 
     }
 }
