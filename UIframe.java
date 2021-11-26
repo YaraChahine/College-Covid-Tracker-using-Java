@@ -44,11 +44,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 	 public JButton signIn;
 	 public JButton signUp;
 	 myFrame(){
-			
-
-			
 			Border border= BorderFactory.createRaisedSoftBevelBorder();
-
 
 			this.setLayout(null);
 			this.setTitle("CovidLess");
