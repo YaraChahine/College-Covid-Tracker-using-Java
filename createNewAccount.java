@@ -7,9 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class createNewAccount {
+public class CreateNewAccount {
 
-    FileInputStream photo;
+    String  photo;
     String firstName;
     String lastName;
     String email;
@@ -19,7 +19,7 @@ public class createNewAccount {
     Boolean vaccinated;
     String vaccinationCard;
 
-    public createNewAccount(FileInputStream photo, String firstName, String lastName, String email, String username, String password, Boolean vaccinated, String vaccinationCard) {
+    public CreateNewAccount(String photo, String firstName, String lastName, String email, String username, String password, Boolean vaccinated, String vaccinationCard) {
         this.photo = photo;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,10 +28,18 @@ public class createNewAccount {
         this.password = password;
         this.vaccinated = vaccinated;
         this.vaccinationCard = vaccinationCard;
+        System.out.println(photo);
+        System.out.println(firstName);
+        System.out.println(lastName);
+        System.out.println(email);
+        System.out.println(username);
+        System.out.println(password);
+        System.out.println(vaccinated);
+        System.out.println(vaccinationCard);
     }
 
     public boolean setToDB(Connection conn){
-        String query = "INSERT INTO USERS VALUES (?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO USERS VALUES (?,?,?,?,?,?,?,?,?)";
         String userNameQuery = "SELECT * from users where username = ?";
 
         try {
@@ -46,16 +54,9 @@ public class createNewAccount {
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
                 byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
-                int data = photo.read();
-                int counter =0;
-                while (data != -1){
-                    counter ++;
-                    data = photo.read();
-                }
-                System.out.println(counter);
 
                 PreparedStatement pStmt = conn.prepareStatement(query);
-                pStmt.setBinaryStream(1, photo, photo.available());
+                pStmt.setString(1, photo);
                 pStmt.setString(2, firstName);
                 pStmt.setString(3, lastName);
                 pStmt.setString(4, email);
@@ -63,6 +64,7 @@ public class createNewAccount {
                 pStmt.setBytes(6, hash);
                 pStmt.setBoolean(7, vaccinated);
                 pStmt.setString(8, vaccinationCard);
+                pStmt.setString(9, "safe");
                 pStmt.execute();
 
                 System.out.println("User added successfully!");

@@ -29,6 +29,7 @@ public class MyFrame extends JFrame implements ActionListener {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 try {
+                    System.out.println("Closed!!!!!!!!!!");
                     dataOutputStream.writeUTF("Exit");
                 } catch (IOException e) {
                     e.printStackTrace();

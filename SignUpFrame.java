@@ -14,7 +14,8 @@ public class SignUpFrame extends JFrame implements ActionListener {
     public DataInputStream dataInputStream;
     public DataOutputStream dataOutputStream;
 
-    public JTextField nameField;
+    public JTextField firstNameField;
+    public JTextField lastNameField;
     public JTextField emailField;
     public JTextField usernameField;
     public JPasswordField passwordField;
@@ -118,27 +119,39 @@ public class SignUpFrame extends JFrame implements ActionListener {
         SignUpLabel.setBounds(30, 0, 170, 40);
         SignUpBackground.add(SignUpLabel);
 
-        JLabel nameLabel = new JLabel("Name: ");
-        nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        nameLabel.setForeground(new Color(109, 151, 233));
-        nameLabel.setBounds(10, 180, 70, 30);
-        panel.add(nameLabel);
+        JLabel firstNameLabel = new JLabel("First Name: ");
+        firstNameLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        firstNameLabel.setForeground(new Color(109, 151, 233));
+        firstNameLabel.setBounds(10, 180, 130, 30);
+        panel.add(firstNameLabel);
 
-        nameField = new JTextField();
-        nameField.setBounds(130, 180, 200, 30);
-        nameField.setBackground(new Color(250, 250, 250));
-        nameField.setBorder(border);
-        panel.add(nameField);
+        firstNameField = new JTextField();
+        firstNameField.setBounds(130, 180, 200, 30);
+        firstNameField.setBackground(new Color(250, 250, 250));
+        firstNameField.setBorder(border);
+        panel.add(firstNameField);
+
+
+        JLabel lastNameLabel = new JLabel("Last Name: ");
+        lastNameLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        lastNameLabel.setForeground(new Color(109, 151, 233));
+        lastNameLabel.setBounds(10, 230, 130, 30);
+        panel.add(lastNameLabel);
+
+        lastNameField = new JTextField();
+        lastNameField.setBounds(130, 230, 200, 30);
+        lastNameField.setBackground(new Color(250, 250, 250));
+        lastNameField.setBorder(border);
+        panel.add(lastNameField);
 
         JLabel emailLabel = new JLabel("Email: ");
         emailLabel.setFont(new Font("Arial", Font.BOLD, 14));
         emailLabel.setForeground(new Color(109, 151, 233));
-        emailLabel.setBounds(10, 230, 70, 30);
+        emailLabel.setBounds(10, 280, 70, 30);
         panel.add(emailLabel);
 
-
         emailField = new JTextField();
-        emailField.setBounds(130, 230, 200, 30);
+        emailField.setBounds(130, 280, 200, 30);
         emailField.setBackground(new Color(250, 250, 250));
         emailField.setBorder(border);
         panel.add(emailField);
@@ -146,12 +159,11 @@ public class SignUpFrame extends JFrame implements ActionListener {
         JLabel usernameLabel = new JLabel("Username: ");
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 14));
         usernameLabel.setForeground(new Color(109, 151, 233));
-        usernameLabel.setBounds(10, 280, 120, 30);
+        usernameLabel.setBounds(10, 330, 120, 30);
         panel.add(usernameLabel);
 
-
         usernameField = new JTextField();
-        usernameField.setBounds(130, 280, 200, 30);
+        usernameField.setBounds(130, 330, 200, 30);
         usernameField.setBackground(new Color(250, 250, 250));
         usernameField.setBorder(border);
         panel.add(usernameField);
@@ -160,12 +172,11 @@ public class SignUpFrame extends JFrame implements ActionListener {
         JLabel passwordLabel = new JLabel("Password: ");
         passwordLabel.setFont(new Font("Arial", Font.BOLD, 14));
         passwordLabel.setForeground(new Color(109, 151, 233));
-        passwordLabel.setBounds(10, 330, 120, 30);
+        passwordLabel.setBounds(10, 380, 120, 30);
         panel.add(passwordLabel);
 
-
         passwordField = new JPasswordField();
-        passwordField.setBounds(130, 330, 200, 30);
+        passwordField.setBounds(130, 380, 200, 30);
         passwordField.setBackground(new Color(250, 250, 250));
         passwordField.setBorder(border);
         panel.add(passwordField);
@@ -174,24 +185,22 @@ public class SignUpFrame extends JFrame implements ActionListener {
         JLabel fileLabel = new JLabel("Upload photo: ");
         fileLabel.setFont(new Font("Arial", Font.BOLD, 14));
         fileLabel.setForeground(new Color(109, 151, 233));
-        fileLabel.setBounds(10, 380, 120, 30);
+        fileLabel.setBounds(10, 430, 120, 30);
         panel.add(fileLabel);
 
 
         imagePathLabel = new JLabel();
         imagePathLabel.setFont(new Font("Arial", Font.BOLD, 7));
         imagePathLabel.setForeground(new Color(109, 151, 233));
-        imagePathLabel.setBounds(260, 380, 120, 30);
+        imagePathLabel.setBounds(260, 430, 120, 30);
         imagePathLabel.setText("tesT");
         panel.add(imagePathLabel);
 
-
         loadButton = new JButton("Choose Photo");
-        loadButton.setBounds(130, 380, 115, 30);
+        loadButton.setBounds(130, 430, 115, 30);
         loadButton.setForeground(new Color(255, 255, 255));
         loadButton.setBackground(new Color(109, 151, 233));
         loadButton.setFocusable(false);
-
         panel.add(loadButton);
 
         loadButton.addActionListener(ev -> {
@@ -216,7 +225,7 @@ public class SignUpFrame extends JFrame implements ActionListener {
 
 
         JLabel vaccinationLabel = new JLabel("Vaccination Status: ");
-        vaccinationLabel.setBounds(10, 430, 125, 30);
+        vaccinationLabel.setBounds(10, 480, 125, 30);
         vaccinationLabel.setFont(new Font("Arial", Font.BOLD, 12));
         vaccinationLabel.setForeground(new Color(109, 151, 233));
         panel.add(vaccinationLabel);
@@ -226,20 +235,20 @@ public class SignUpFrame extends JFrame implements ActionListener {
         ButtonGroup group1 = new ButtonGroup();
         group1.add(bNotVaccinated);
         group1.add(bVaccinated);
-        bVaccinated.setBounds(140, 430, 140, 30);
+        bVaccinated.setBounds(140, 480, 140, 30);
         bVaccinated.setBackground(new Color(255, 255, 255));
         bNotVaccinated.setBackground(new Color(255, 255, 255));
 
         bVaccinated.addActionListener(this);
         bNotVaccinated.addActionListener(this);
-        bNotVaccinated.setBounds(140, 460, 140, 30);
+        bNotVaccinated.setBounds(140, 510, 140, 30);
         panel.add(bNotVaccinated);
         panel.add(bVaccinated);
 
         // to be added in case vaccinated is true
         vaccinatedFormLabel = new JLabel();
         vaccinatedFormLabel.setForeground(new Color(109, 151, 233));
-        vaccinatedFormLabel.setBounds(10, 500, 300, 30);
+        vaccinatedFormLabel.setBounds(10, 550, 300, 30);
         vaccinatedFormLabel.setFont(new Font("Arial", Font.BOLD, 14));
         vaccinatedFormLabel.setText(" ");
 
@@ -249,11 +258,11 @@ public class SignUpFrame extends JFrame implements ActionListener {
         certificateLabel = new JLabel();
         certificateLabel.setFont(new Font("Arial", Font.BOLD, 12));
         certificateLabel.setForeground(new Color(109, 151, 233));
-        certificateLabel.setBounds(80, 590, 200, 30);
+        certificateLabel.setBounds(80, 620, 200, 30);
         certificateLabel.setText(" ");
 
         CertificateButton = new JButton("Upload Certificate");
-        CertificateButton.setBounds(90, 560, 166, 30);
+        CertificateButton.setBounds(90, 600, 166, 30);
         CertificateButton.setForeground(new Color(255, 255, 255));
         CertificateButton.setBackground(new Color(109, 151, 233));
         CertificateButton.setFocusable(false);
@@ -274,13 +283,14 @@ public class SignUpFrame extends JFrame implements ActionListener {
 
 
         submit = new JButton("Sign In");
-        submit.setBounds(230, 520, 100, 30);
+        submit.setBounds(230, 570, 100, 30);
         submit.setForeground(new Color(255, 255, 255));
         submit.setBackground(new Color(109, 151, 233));
+        submit.addActionListener(this);
         panel.add(submit);
 
         back = new JButton("Back");
-        back.setBounds(10, 520, 100, 30);
+        back.setBounds(10, 570, 100, 30);
         back.setForeground(new Color(255, 255, 255));
         back.setBackground(new Color(109, 151, 233));
         back.addActionListener(this);
@@ -301,33 +311,57 @@ public class SignUpFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        if (e.getSource() == bVaccinated) {
-            vaccinatedFormLabel.setText("Please upload your vaccination certificate");
-            vaccStatus = "Vaccinated";
-            panel.add(CertificateButton);
-            panel.add(certificateLabel);
-            CertificateButton.setVisible(true);
-            certificateLabel.setVisible(true);
-            submit.setBounds(230, 620, 100, 30);
-            back.setBounds(10, 620, 100, 30);
+
+        try {
+            if (e.getSource() == bVaccinated) {
+                vaccinatedFormLabel.setText("Please upload your vaccination certificate");
+                vaccStatus = "Vaccinated";
+                panel.add(CertificateButton);
+                panel.add(certificateLabel);
+                CertificateButton.setVisible(true);
+                certificateLabel.setVisible(true);
+                submit.setBounds(230, 680, 100, 30);
+                back.setBounds(10, 680, 100, 30);
 
 
-        } else {
-            if (e.getSource() == bNotVaccinated) {
+            } else if (e.getSource() == bNotVaccinated) {
                 vaccinatedFormLabel.setText(" ");
                 vaccStatus = "Not vaccinated";
                 CertificateButton.setVisible(false);
                 certificateLabel.setVisible(false);
-                submit.setBounds(230, 520, 100, 30);
-                back.setBounds(10, 520, 100, 30);
+                submit.setBounds(230, 570, 100, 30);
+                back.setBounds(10, 570, 100, 30);
 
-
-            } else {
-                if (e.getSource() == back) {
-                    MyFrame myFrame = new MyFrame(dataInputStream, dataOutputStream);
-                    this.dispose();
+            } else if (e.getSource() == submit) {
+                if (!firstNameField.equals("") || !lastNameField.equals("") || !emailField.equals("") || !usernameField.equals("") || !passwordField.equals("") || !userImagePath.equals("") || !vaccStatus.equals("") || !certificatePath.equals("")) {
+                    System.out.println("ahah");
+                    String str = firstNameField.getText() + "\n"
+                            + lastNameField.getText() + "\n"
+                            + emailField.getText() + "\n"
+                            + usernameField.getText() + "\n"
+                            + passwordField.getText() + "\n"
+                            + userImagePath + "\n"
+                            + vaccStatus + "\n"
+                            + certificatePath;
+                    dataOutputStream.writeUTF(str);
+                    if (!dataInputStream.readUTF().equalsIgnoreCase("Already exists")) {
+                        AccountPageFrame accountPageFrame = new AccountPageFrame(dataInputStream, dataOutputStream);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Username Already exists!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Fill all the fields!");
                 }
+
+            } else if (e.getSource() == back) {
+                System.out.println("Back");
+                dataOutputStream.writeUTF("back");
+                MyFrame myFrame = new MyFrame(dataInputStream, dataOutputStream);
+                this.dispose();
             }
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
 
 

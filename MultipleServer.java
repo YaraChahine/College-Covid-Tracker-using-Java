@@ -69,15 +69,25 @@ class ClientHandler extends Thread {
 		String received;
 		String toReturn;
 		Boolean done = false;
+		Boolean clientClosed = false;
 		while (!done){
 			try {
 				received = inputFromClient.readUTF();
 				String[] strings = received.split("\n");
-				for (int i=0; i< strings.length; i++){
-					System.out.print(strings[i] + " ");
-				}
-				System.out.println();
-
+				/**
+				 * _> Login: .Login
+				 * 			 .Username
+				 * 			 .Password
+				 *
+				 * _> Signup: .Name
+				 * 			  .Email
+				 * 			  .Username
+				 * 			  .Password
+				 * 			  .Photo
+				 * 			  .Vaccination Status
+				 * 			  .Vaccination Card
+				 *
+				 */
 
 				switch (strings[0]) {
 					case "Login":
@@ -91,30 +101,69 @@ class ClientHandler extends Thread {
 						}
 						break;
 					case "Signup":
-						System.out.println(received);
+						System.out.println("Hello from signup!");
+						boolean userDoneSignup = false;
+						while(!userDoneSignup) {
+							received = inputFromClient.readUTF();
+							String[] userInfo = received.split("\n");
+
+							if (received.equalsIgnoreCase("back")){
+								break;
+							}
+							if (received.equals("Exit")) {
+								System.out.println("-----------------------------------------------------------------------------------");
+								System.out.println("Client " + this.clientSocket + " sends exit...");
+								System.out.println("Closing this connection.");
+								this.clientSocket.close();
+								clientClosed = true;
+								System.out.println("Connection closed");
+								break;
+							}
+
+							String firstName = userInfo[0];
+							String lastName = userInfo[1];
+							String email = userInfo[2];
+							String username = userInfo[3];
+							String password = userInfo[4];
+							String photo = userInfo[5];
+							Boolean vaccinated = false;
+							if (userInfo[6].equalsIgnoreCase("Vaccinated")) {
+								vaccinated = true;
+							}
+							String vaccinationCard = userInfo[7];
+							CreateNewAccount createNewAccount = new CreateNewAccount(photo, firstName, lastName, email, username, password, vaccinated, vaccinationCard);
+							userDoneSignup = createNewAccount.setToDB(connection);
+							if (userDoneSignup){
+								done = true;
+							}
+							outputToClient.writeUTF("Already exists");
+						}
 						break;
 					default:
 						System.out.println("[ERROR]: I am in Client Handler, switch part!");
 				}
 
-				if(done){
+				if (done){
 					break;
 				}
 
-				if (received.equals("Exit")) {
+				if (received.equalsIgnoreCase("Exit")) {
 					System.out.println("-----------------------------------------------------------------------------------");
 					System.out.println("Client " + this.clientSocket + " sends exit...");
 					System.out.println("Closing this connection.");
 					this.clientSocket.close();
+					clientClosed = true;
 					System.out.println("Connection closed");
 					break;
 				}
+
 			}catch (Exception e){
 				e.printStackTrace();
 			}
 		}
 
-		while (true) {
+		while (true && !clientClosed) {
+			System.out.println("helllooo");
 			try {
 				// Initiate communication with Client
 				outputToClient.writeUTF("What do you want?[Date | Time]..\n" + "Type Exit to terminate connection.");
@@ -129,6 +178,7 @@ class ClientHandler extends Thread {
 					System.out.println("Client " + this.clientSocket + " sends exit...");
 					System.out.println("Closing this connection.");
 					this.clientSocket.close();
+					clientClosed = true;
 					System.out.println("Connection closed");
 					break;
 				}
