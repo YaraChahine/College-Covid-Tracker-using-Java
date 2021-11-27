@@ -38,6 +38,27 @@ INSERT INTO `contagiousinstructions` VALUES ('Wear a mask properly.'),('Stay at 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `locations`
+--
+
+DROP TABLE IF EXISTS `locations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `locations` (
+  `location` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `locations`
+--
+
+LOCK TABLES `locations` WRITE;
+/*!40000 ALTER TABLE `locations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `safeinstructions`
 --
 
@@ -60,6 +81,31 @@ INSERT INTO `safeinstructions` VALUES ('Always keep your mask on!'),('Wear a mas
 UNLOCK TABLES;
 
 --
+-- Table structure for table `trustedfriends`
+--
+
+DROP TABLE IF EXISTS `trustedfriends`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `trustedfriends` (
+  `username` varchar(255) NOT NULL,
+  `trusted_user` varchar(255) NOT NULL,
+  PRIMARY KEY (`username`,`trusted_user`),
+  CONSTRAINT `trustedfriends_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `trustedfriends`
+--
+
+LOCK TABLES `trustedfriends` WRITE;
+/*!40000 ALTER TABLE `trustedfriends` DISABLE KEYS */;
+INSERT INTO `trustedfriends` VALUES ('yara_chahine','hasan_mshawrab');
+/*!40000 ALTER TABLE `trustedfriends` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -76,6 +122,9 @@ CREATE TABLE `users` (
   `vaccinated` tinyint(1) NOT NULL,
   `vaccination_card` varbinary(8000) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
+  `pcr_result` varchar(255) DEFAULT 'negative',
+  `location` varchar(255) DEFAULT NULL,
+  `time_arrived` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -86,7 +135,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('010','Ali','Jad','jad@gmail.com','ali_jad',_binary '12345678',0,_binary '0101',NULL),('000','Hasan','Mshawrab','hasan@gmail.com','hasan_mshawrab',_binary '123123',1,_binary '0000',NULL),('','Adam','Smith','adam@gmail.com','will_smith',_binary '\Ôy|Å-˚dñ\›]?åv#åú=S,\…\\^◊®ò¶O',0,_binary '0101',NULL),('C:\\Users\\lenovo\\Downloads\\2021.10.10-12.27.42.jpg','yara','chahine','yara@gmail.com','yara_chahine',_binary '\Ôy|Å-˚dñ\›]?åv#åú=S,\…\\^◊®ò¶O',0,_binary 'null','safe');
+INSERT INTO `users` VALUES ('010','Ali','Jad','jad@gmail.com','ali_jad',_binary '12345678',0,_binary '0101',NULL,'negative',NULL,NULL),('C:\\Users\\lenovo\\Downloads\\2021.10.10-12.27.42.jpg','lasla','lsas','asdasd','hasan',_binary '-8q^\0äR`∞®ºd\\í,⁄Øü_éÆC¸\›5',0,_binary 'null','safe','negative',NULL,NULL),('000','Hasan','Mshawrab','hasan@gmail.com','hasan_mshawrab',_binary '123123',1,_binary '0000','contagious','negative',NULL,NULL),('','Adam','Smith','adam@gmail.com','will_smith',_binary '\Ôy|Å-˚dñ\›]?åv#åú=S,\…\\^◊®ò¶O',0,_binary '0101',NULL,'negative','Nicol_Hall_301','10:26:47'),('C:\\Users\\lenovo\\Downloads\\2021.10.10-12.27.42.jpg','yara','chahine','yara@gmail.com','yara_chahine',_binary '\Ôy|Å-˚dñ\›]?åv#åú=S,\…\\^◊®ò¶O',0,_binary 'null','safe','negative','AKSOB_1105','01:32:08'),('C:\\Users\\lenovo\\Downloads\\2021.10.10-12.27.42.jpg','lala','alalla','laslalsa','yarach',_binary '\Ôy|Å-˚dñ\›]?åv#åú=S,\…\\^◊®ò¶O',0,_binary 'null','safe','negative',NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -99,4 +148,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-26 19:08:30
+-- Dump completed on 2021-11-27 13:32:12

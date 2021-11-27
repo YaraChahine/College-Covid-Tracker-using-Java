@@ -20,7 +20,7 @@ public class ActiveCasesFrame extends JFrame implements ActionListener {
     public JButton back;
 
 
-    public ActiveCasesFrame(DataInputStream dataInputStream, DataOutputStream dataOutputStream) {
+    public ActiveCasesFrame(DataInputStream dataInputStream, DataOutputStream dataOutputStream) throws IOException {
 
         this.dataInputStream = dataInputStream;
         this.dataOutputStream = dataOutputStream;
@@ -68,7 +68,7 @@ public class ActiveCasesFrame extends JFrame implements ActionListener {
         logo.setFont(new Font("Bodoni Mt", Font.ITALIC, 48));
         imgLabel.add(logo);
 
-        JLabel Number = new JLabel("Number of Active Cases to is ");
+        JLabel Number = new JLabel("Number of Active Cases is: " + dataInputStream.readUTF());
         Number.setBounds(70, 200, 300, 50);
         Number.setForeground(new Color(255, 255, 255));
         Number.setFont(new Font("Bodoni Mt", Font.BOLD, 25));

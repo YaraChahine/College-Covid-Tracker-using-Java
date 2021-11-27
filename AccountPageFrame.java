@@ -123,19 +123,30 @@ class AccountPageFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        if (e.getSource() == ActiveCases) {
-            new ActiveCasesFrame(dataInputStream, dataOutputStream);
-            this.dispose();
-        } else if (e.getSource() == ViewTrustedList) {
-            new ViewTrustedListFrame(dataInputStream, dataOutputStream);
-            this.dispose();
-        } else if (e.getSource() == CheckFriends) {
-            new CheckFriendsFrame(dataInputStream, dataOutputStream);
-            this.dispose();
-        } else if (e.getSource() == SubmitPCR) {
-            new SubmitPCRFrame(dataInputStream, dataOutputStream);
-            this.dispose();
+        try {
+            if (e.getSource() == ActiveCases) {
+                dataOutputStream.writeUTF("NumberOfActiveCases");
+                new ActiveCasesFrame(dataInputStream, dataOutputStream);
+                this.dispose();
+            } else if (e.getSource() == ViewTrustedList) {
+                System.out.println("you clicked on view trusted");
+                String str="ViewTrustedPeopleList\n";
+                try {
+                    dataOutputStream.writeUTF(str);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                new ViewTrustedListFrame(dataInputStream, dataOutputStream);
+                this.dispose();
+            } else if (e.getSource() == CheckFriends) {
+                new CheckFriendsFrame(dataInputStream, dataOutputStream);
+                this.dispose();
+            } else if (e.getSource() == SubmitPCR) {
+                new SubmitPCRFrame(dataInputStream, dataOutputStream);
+                this.dispose();
+            }
+        }catch (Exception exception){
+            exception.printStackTrace();
         }
     }
 }
